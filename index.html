@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>موقع أحمد رشدي</title>
   <style>
     body {
@@ -16,7 +16,7 @@
     }
 
     header {
-      background-color: #007bff;
+      background: linear-gradient(45deg, #007bff, #00c6ff);
       color: white;
       padding: 40px 0;
     }
@@ -33,6 +33,10 @@
 
     .buttons {
       margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
     }
 
     .btn {
@@ -40,19 +44,46 @@
       background-color: #007bff;
       color: white;
       padding: 10px 20px;
-      margin: 5px;
+      margin: 0;
       text-decoration: none;
       border-radius: 5px;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s, transform 0.3s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 180px;
+      text-align: center;
     }
 
     .btn:hover {
       background-color: #0056b3;
+      transform: scale(1.1);
     }
 
     section {
       padding: 40px 20px;
       border-bottom: 1px solid #ddd;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-images {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .gallery-images img {
+      width: 200px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 
     footer {
@@ -71,7 +102,8 @@
 
     <div class="buttons">
       <a href="#projects" class="btn">مشاريعي</a>
-      <a href="cv.pdf" class="btn" target="_blank">السيرة الذاتية</a>
+      <a href="#cv" class="btn">السيرة الذاتية</a>
+      <a href="#gallery" class="btn">معرض الأعمال</a>
       <a href="#contact" class="btn">تواصل معي</a>
     </div>
   </header>
@@ -79,6 +111,21 @@
   <section id="projects">
     <h2>مشاريعي</h2>
     <p>هنا يمكنك عرض بعض المشاريع التي أنجزتها مثل مواقع ويب، تطبيقات، أو غيرها.</p>
+  </section>
+
+  <section id="cv">
+    <h2>السيرة الذاتية</h2>
+    <p>أنا أحمد رشدي، مطور واجهات أمامية بخبرة في HTML، CSS، JavaScript، وReact. أتممت العديد من المشاريع التي تركز على تجربة المستخدم وتوافق التصميم.</p>
+    <p>أسعى دائمًا لتطوير مهاراتي والبقاء على اطلاع بآخر تقنيات تطوير الويب.</p>
+  </section>
+
+  <section id="gallery">
+    <h2>معرض الأعمال</h2>
+    <div class="gallery-images">
+      <img src="https://via.placeholder.com/200x130?text=مشروع+1" alt="مشروع 1" />
+      <img src="https://via.placeholder.com/200x130?text=مشروع+2" alt="مشروع 2" />
+      <img src="https://via.placeholder.com/200x130?text=مشروع+3" alt="مشروع 3" />
+    </div>
   </section>
 
   <section id="contact">
@@ -90,6 +137,23 @@
   <footer>
     &copy; 2025 أحمد رشدي. جميع الحقوق محفوظة.
   </footer>
+
+  <script>
+    function revealSections() {
+      const sections = document.querySelectorAll('section');
+      const windowHeight = window.innerHeight;
+
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < windowHeight - 100) {
+          section.classList.add('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', revealSections);
+    window.addEventListener('load', revealSections);
+  </script>
 
 </body>
 </html>
